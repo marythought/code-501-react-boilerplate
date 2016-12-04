@@ -9,8 +9,8 @@ class HomePage extends React.Component {
       <Bio
         // imgSrc={portrait}
         // imgAlt='Picture of Mary and son Aurelio'
-        name="Mary Dickson Diaz"
-        age="too old for this sh*t"
+        name='Mary Dickson Diaz'
+        age='too old for this sh*t'
         pronoun={{
           nominative: 'she',
           accusative: 'her',
