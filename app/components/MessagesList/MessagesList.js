@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import MessageBox from './MessageBox'
 
 class MessagesList extends React.Component {
   constructor (props) {
@@ -20,20 +21,24 @@ class MessagesList extends React.Component {
       })
   }
   render () {
-    if (this.state.messageList.length > 0){
+    if (this.state.messageList.length > 0) {
       return (
-        <ul>
-          {this.state.messageList.map((message, i) =>
-            <li key={i}>
-              <p>{message.content}</p>
-              <p>Written by {message.author.name} at {message.updated}</p>
-            </li>
-        )}
-        </ul>
+        <div className='MessagesList'>
+          <ul>
+            {this.state.messageList.map((message, i) =>
+              <MessageBox
+                key={i}
+                author={message.author}
+                message={message.content}
+                date={message.updated}
+              />
+            )}
+          </ul>
+        </div>
       )
     } else {
       return (
-        <div>
+        <div className='MessagesList'>
           >No messages.
         </div>
       )
