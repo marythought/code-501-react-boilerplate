@@ -12,9 +12,9 @@
     "test:tdd": "npm run test -- --auto-watch --no-single-run"
   },
   "author": {
-    "name": "Emily Aviva Kapor-Mater",
-    "email": "emily@emilyaviva.com",
-    "url": "https://www.emilyaviva.com/"
+    "name": "Mary Dickson",
+    "email": "mdickson@gmail.com",
+    "url": "https://www.marydickson.com/"
   },
   "license": "MIT",
   "dependencies": {
