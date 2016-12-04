@@ -1,12 +1,24 @@
 import React from 'react'
+import Bio from '../Bio/Bio'
+
+// const portrait = require('../../img/leo.jpg')
 
 class HomePage extends React.Component {
   render () {
     return (
-      <div>
-        <h1>Welcome to Code 501</h1>
-        <h2>such web, very components, wow</h2>
-      </div>
+      <Bio
+        // imgSrc={portrait}
+        // imgAlt='Picture of Mary and son Aurelio'
+        name="Mary Dickson Diaz"
+        age="too old for this sh*t"
+        pronoun={{
+          nominative: 'she',
+          accusative: 'her',
+          possessive: 'hers',
+          reflexive: 'herself'
+        }}
+        favoriteActivity='sleeping'
+      />
     )
   }
 }

@@ -1,3 +1,5 @@
+// emily wrote this heavily from survive_js. webhack2.0 will have a tool for easy scaffolding.
+
 const path = require('path')
 const merge = require('webpack-merge')
 const validate = require('webpack-validator')
