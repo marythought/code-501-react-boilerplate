@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import MessageBox from './MessageBox'
+import _ from 'lodash'
 
 class MessagesList extends React.Component {
   constructor (props) {
@@ -10,7 +11,7 @@ class MessagesList extends React.Component {
     }
   }
   componentDidMount () {
-    axios.get('https://message-list.appspot.com/messages')
+    axios.get('https://message-list.appspot.com/messages?limit=10')
       .then((res) => {
         this.setState({
           messageList: res.data.messages
@@ -22,10 +23,12 @@ class MessagesList extends React.Component {
   }
   render () {
     if (this.state.messageList.length > 0) {
+      // _.sortBy(collection, [iteratees=[_.identity]])
+      const sortedMessages = _.orderBy(this.state.messageList, (o) => o.updated, 'desc')
       return (
         <div className='MessagesList'>
           <ul>
-            {this.state.messageList.map((message, i) =>
+            {sortedMessages.map((message, i) =>
               <MessageBox
                 key={i}
                 author={message.author}
