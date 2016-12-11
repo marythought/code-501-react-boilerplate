@@ -3,6 +3,7 @@ import React from 'react'
 import Bio from '../Bio/Bio'
 import BooksList from '../BooksList/BooksList'
 import MessagesList from '../MessagesList/MessagesList'
+import PostToSlack from '../PostToSlack/PostToSlack'
 // const portrait = require('../../img/leo.jpg')
 
 class HomePage extends React.Component {
@@ -22,6 +23,7 @@ class HomePage extends React.Component {
           }}
           favoriteActivity='sleeping'
         />
+        <PostToSlack />
         <BooksList />
         <MessagesList />
       </main>

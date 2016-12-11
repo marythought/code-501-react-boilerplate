@@ -7,19 +7,37 @@ class MessagesList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      messageList: []
+      messageList: [],
+      token: ''
     }
   }
-  componentDidMount () {
-    axios.get('https://message-list.appspot.com/messages?limit=10')
+  getMessages () {
+    let url = 'https://message-list.appspot.com/messages?limit=10'
+    if (this.state.token !== '') {
+      url += `&pageToken=${this.state.token}`
+    }
+    axios.get(url)
       .then((res) => {
+        const oldMessages = this.state.messageList
+        const newMessages = oldMessages.concat(res.data.messages)
         this.setState({
-          messageList: res.data.messages
+          messageList: newMessages,
+          token: res.data.pageToken
         })
       })
       .catch((res) => {
         console.error(res)
       })
+    }
+  deleteMessage (id) {
+    const oldMessages = this.state.messageList
+    const newMessages = oldMessages.filter((o) => o.id !== id)
+    this.setState({
+      messageList: newMessages
+    })
+  }
+  componentDidMount () {
+    this.getMessages()
   }
   render () {
     if (this.state.messageList.length > 0) {
@@ -27,6 +45,7 @@ class MessagesList extends React.Component {
       const sortedMessages = _.orderBy(this.state.messageList, (o) => o.updated, 'desc')
       return (
         <div className='MessagesList'>
+          <button onClick={this.getMessages.bind(this)}>Get More Messages</button>
           <ul>
             {sortedMessages.map((message, i) =>
               <MessageBox
@@ -34,6 +53,7 @@ class MessagesList extends React.Component {
                 author={message.author}
                 message={message.content}
                 date={message.updated}
+                onDelete={this.deleteMessage.bind(this, message.id)}
               />
             )}
           </ul>
@@ -42,7 +62,8 @@ class MessagesList extends React.Component {
     } else {
       return (
         <div className='MessagesList'>
-          >No messages.
+          <h2>No messages.</h2>
+          <button onClick={this.getMessages.bind(this)}>Get More Messages??</button>
         </div>
       )
     }
